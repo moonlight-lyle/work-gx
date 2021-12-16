@@ -17,5 +17,8 @@ public class Test {
         for (String str : list) {
             System.out.println(str);
         }
+        String str = null;
+        str = String.format("Hi,%s", "王力");
+        System.out.println(str);
     }
 }
