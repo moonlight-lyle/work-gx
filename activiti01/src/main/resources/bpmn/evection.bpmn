@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bpmn2:definitions xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:tns="http://bpmn.io/schema/bpmn" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" expressionLanguage="http://www.w3.org/1999/XPath" id="sample-diagram" name="" targetNamespace="http://bpmn.io/schema/bpmn" typeLanguage="http://www.w3.org/2001/XMLSchema">
+  <bpmn2:process id="evection" isClosed="false" isExecutable="true" name="evection" processType="None">
+    <bpmn2:documentation id="evection_D_1"/>
+    <bpmn2:startEvent id="myEvection" name="出差申请"/>
+    <bpmn2:userTask activiti:assignee="zhangsan" activiti:exclusive="true" camunda:assignee="zhangsan" id="Activity_01" name="创建出差申请单"/>
+    <bpmn2:sequenceFlow id="Flow_1m1m85i" sourceRef="Activity_01" targetRef="Activity_02"/>
+    <bpmn2:userTask activiti:assignee="jerry" activiti:exclusive="true" camunda:assignee="jerry" id="Activity_02" name="经理审批"/>
+    <bpmn2:sequenceFlow id="Flow_0t42om9" sourceRef="Activity_02" targetRef="Activity_03"/>
+    <bpmn2:userTask activiti:assignee="jack" activiti:exclusive="true" camunda:assignee="jack" id="Activity_03" name="总经理审批"/>
+    <bpmn2:sequenceFlow id="Flow_0snkwcg" sourceRef="Activity_03" targetRef="Activity_04"/>
+    <bpmn2:userTask activiti:assignee="rose" activiti:exclusive="true" camunda:assignee="rose" id="Activity_04" name="财务审批"/>
+    <bpmn2:endEvent id="Event_End" name="审批结束"/>
+    <bpmn2:sequenceFlow id="Flow_1xxuc8q" sourceRef="Activity_04" targetRef="Event_End"/>
+    <bpmn2:sequenceFlow id="Flow_0dpmj44" sourceRef="myEvection" targetRef="Activity_01"/>
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram documentation="background=#FFFFFF;count=1;horizontalcount=1;orientation=0;width=842.4;height=1195.2;imageableWidth=832.4;imageableHeight=1185.2;imageableX=5.0;imageableY=5.0" id="Diagram-_1" name="Untitled Diagram">
+    <bpmndi:BPMNPlane bpmnElement="evection">
+      <bpmndi:BPMNShape bpmnElement="myEvection" id="Shape-myEvection">
+        <dc:Bounds height="32.0" width="32.0" x="192.0" y="62.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Activity_01" id="Shape-Activity_01">
+        <dc:Bounds height="80.0" width="100.0" x="160.0" y="160.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="80.0" width="100.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Activity_02" id="Shape-Activity_02">
+        <dc:Bounds height="80.0" width="100.0" x="160.0" y="290.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="80.0" width="100.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Activity_03" id="Shape-Activity_03">
+        <dc:Bounds height="80.0" width="100.0" x="160.0" y="430.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="80.0" width="100.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Activity_04" id="Shape-Activity_04">
+        <dc:Bounds height="80.0" width="100.0" x="160.0" y="560.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="80.0" width="100.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Event_End" id="Shape-Event_End">
+        <dc:Bounds height="32.0" width="32.0" x="192.0" y="682.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="Flow_0snkwcg" id="BPMNEdge_Flow_0snkwcg" sourceElement="Activity_03" targetElement="Activity_04">
+        <di:waypoint x="210.0" y="510.0"/>
+        <di:waypoint x="210.0" y="560.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Flow_1xxuc8q" id="BPMNEdge_Flow_1xxuc8q" sourceElement="Activity_04" targetElement="Event_End">
+        <di:waypoint x="208.0" y="640.0"/>
+        <di:waypoint x="208.0" y="682.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Flow_0t42om9" id="BPMNEdge_Flow_0t42om9" sourceElement="Activity_02" targetElement="Activity_03">
+        <di:waypoint x="210.0" y="370.0"/>
+        <di:waypoint x="210.0" y="430.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Flow_0dpmj44" id="BPMNEdge_Flow_0dpmj44" sourceElement="myEvection" targetElement="Activity_01">
+        <di:waypoint x="208.0" y="94.0"/>
+        <di:waypoint x="208.0" y="160.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Flow_1m1m85i" id="BPMNEdge_Flow_1m1m85i" sourceElement="Activity_01" targetElement="Activity_02">
+        <di:waypoint x="210.0" y="240.0"/>
+        <di:waypoint x="210.0" y="290.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>

@@ -4,6 +4,7 @@ import cn.hutool.core.date.DateTime;
 import cn.hutool.extra.ftp.Ftp;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
@@ -14,8 +15,11 @@ import org.springframework.util.CollectionUtils;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.sql.Struct;
 import java.util.*;
+import java.util.stream.Collectors;
+import org.springframework.util.ObjectUtils;
 
 @Slf4j
 @Component
@@ -254,21 +258,83 @@ public class FTPUtil {
 
 
     public static void main(String[] args) throws IOException {
-        Ftp ftp = create();
-        // 上传
-//        upload(ftp,"a.jpg","/test",new File("D:\\b.jpg"));
-        // 下载
-        ftp.download("/test/a.jpg", new File("D:\\c.jpg"));
-        // 判断文件是否存在
-        boolean flag = existFile("/test/b.jpg");
-        System.out.println(flag);
-        // 递归遍历文件夹
-        List<String> alreadyQueriedDirList = new ArrayList<>(); // 已经查询过的文件夹集合
-        List<String> requiredQueryDirList = new ArrayList<>(); // 需要查询的文件夹集合
-        List<String> alreadyQueriedFileList = new ArrayList<>(); // 已经查询到的文件名集合
-        requiredQueryDirList.add("/test");
-        queryAllChildrenDirAndChildrenFile(alreadyQueriedDirList, alreadyQueriedFileList, requiredQueryDirList);
+//        Ftp ftp = create();
+//        // 上传
+////        upload(ftp,"a.jpg","/test",new File("D:\\b.jpg"));
+//        // 下载
+//        ftp.download("/test/a.jpg", new File("D:\\c.jpg"));
+//        // 判断文件是否存在
+//        boolean flag = existFile("/test/b.jpg");
+//        System.out.println(flag);
+//        // 递归遍历文件夹
+//        List<String> alreadyQueriedDirList = new ArrayList<>(); // 已经查询过的文件夹集合
+//        List<String> requiredQueryDirList = new ArrayList<>(); // 需要查询的文件夹集合
+//        List<String> alreadyQueriedFileList = new ArrayList<>(); // 已经查询到的文件名集合
+//        requiredQueryDirList.add("/test");
+//        queryAllChildrenDirAndChildrenFile(alreadyQueriedDirList, alreadyQueriedFileList, requiredQueryDirList);
 
+        // 测试
+//        Map<String, String> map = list.stream().collect(Collectors.toMap(Person::getId, Person::getName,(key1 , key2)-> key2 ));
+//        System.out.println(map);
+
+//        List<OpenDate> openDateList=new ArrayList<>();
+//        OpenDate openDate1=new OpenDate(1,"2022-02-22","申");
+//        OpenDate openDate2=new OpenDate(2,"2022-02-22","申");
+//        OpenDate openDate3=new OpenDate(3,"2022-02-22","赎");
+//        OpenDate openDate4=new OpenDate(4,"2022-02-21","赎");
+//        openDateList.add(openDate1);
+//        openDateList.add(openDate2);
+//        openDateList.add(openDate3);
+//        openDateList.add(openDate4);
+//        Map<String, List<OpenDate>> map = openDateList.stream().collect(Collectors.groupingBy(item -> item.getOpenDate() + "_" + item.getBusinessType()));
+//        for (Map.Entry<String, List<OpenDate>> stringStringEntry : map.entrySet()) {
+//            System.out.println(stringStringEntry.getKey()+"---"+stringStringEntry.getValue());
+//        }
+
+//        BigDecimal bigDecimal=new BigDecimal(0);
+//        System.out.println(bigDecimal!=null);
+//        System.out.println(bigDecimal.compareTo(BigDecimal.ZERO)>0);
+        // 求差集
+        // 数据库数据
+        List<User> list = new ArrayList();
+        list.add(new User(1L,"zhangsan"));
+        list.add(new User(2L,"lisi"));
+        list.add(new User(3L,"zhaoliu"));
+        list.add(new User(4L,"tianqi"));
+        list.add(new User(5L,"wangba"));
+        list.add(new User(6L,"liyu"));
+
+        // 前端传的
+        List<User> list1 = new ArrayList();
+//        list1.add(new User(1L,"zhangsan"));
+//        list1.add(new User(2L,"lisi"));
+//        list1.add(new User(3L,"zhaoliu"));
+//        list1.add(new User(4L,"tianqi"));
+//        list1.add(new User("lida"));
+
+
+        List<Long> idList = list.stream().map(User::getId).collect(Collectors.toList());
+        if (org.apache.commons.collections.CollectionUtils.isNotEmpty(list1)) {
+            for (User user1 : list1) {
+                if (idList.contains(user1.getId())) {
+                    System.out.println("更新："+user1.getId());
+                }
+                if (Objects.isNull(user1.getId())) {
+                    System.out.println("保存："+user1.getUserName());
+                }
+            }
+            // 求差集
+            list.removeAll(list1);
+            for (User user1 : list) {
+                System.out.println("删除1："+user1.getId());
+            }
+        }else {
+            if (org.apache.commons.collections.CollectionUtils.isNotEmpty(list)) {
+                for (User user1 : list) {
+                    System.out.println("删除2："+user1.getId());
+                }
+            }
+        }
     }
 
 }
