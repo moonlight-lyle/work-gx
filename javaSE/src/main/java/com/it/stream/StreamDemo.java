@@ -1,6 +1,7 @@
 package com.it.stream;
 
 
+import com.alibaba.fastjson.JSONArray;
 import com.it.pojo.User;
 import org.apache.commons.lang3.StringUtils;
 
@@ -32,15 +33,15 @@ public class StreamDemo {
 //        stream.forEach(System.out::println);
 
         // 集合收集器
-        List<User> userList=new ArrayList<>();
-        User user1=new User(18,"张三","湖北");
-        User user2=new User(20,"张铁",null);
-        User user3=new User(21,"李四","湖南");
-        User user4=new User(25,"李静","广西");
-        userList.add(user1);
-        userList.add(user2);
-        userList.add(user3);
-        userList.add(user4);
+//        List<User> userList=new ArrayList<>();
+//        User user1=new User(18,"张三","湖北");
+//        User user2=new User(20,"张铁",null);
+//        User user3=new User(21,"李四","湖南");
+//        User user4=new User(25,"李静","广西");
+//        userList.add(user1);
+//        userList.add(user2);
+//        userList.add(user3);
+//        userList.add(user4);
         // 收集年龄大于20的用户
 //        List<User> users = userList.stream().filter(item -> item.getAge() > 20).collect(Collectors.toList());
 //        for (User user : users) {
@@ -52,10 +53,23 @@ public class StreamDemo {
 //            System.out.println(s);
 //        }
 
-        List<User> collect = userList.stream().filter(item -> StringUtils.isNotEmpty(item.getAddress())).collect(Collectors.toList());
-        for (User user : collect) {
-            System.out.println(user);
-        }
+//        List<User> collect = userList.stream().filter(item -> StringUtils.isNotEmpty(item.getAddress())).collect(Collectors.toList());
+//        for (User user : collect) {
+//            System.out.println(user);
+//        }
+
+        ArrayList<User> users = new ArrayList<>();
+        User user1=new User(18,"张三","湖北");
+        User user2=new User(20,"张铁",null);
+        User user3=new User(21,"李四","湖南");
+        User user4=new User(25,"李静","广西");
+        users.add(user1);
+        users.add(user2);
+        users.add(user3);
+        users.add(user4);
+        users.removeIf(user -> (user.getAge() > 18));
+        System.out.println(JSONArray.toJSONString(users));
+
 
     }
 }
