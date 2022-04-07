@@ -2,6 +2,7 @@ package com.it.stream;
 
 
 import com.alibaba.fastjson.JSONArray;
+import com.it.enumeration.LegTypeEnum;
 import com.it.pojo.User;
 import org.apache.commons.lang3.StringUtils;
 
@@ -58,17 +59,19 @@ public class StreamDemo {
 //            System.out.println(user);
 //        }
 
-        ArrayList<User> users = new ArrayList<>();
-        User user1=new User(18,"张三","湖北");
-        User user2=new User(20,"张铁",null);
-        User user3=new User(21,"李四","湖南");
-        User user4=new User(25,"李静","广西");
-        users.add(user1);
-        users.add(user2);
-        users.add(user3);
-        users.add(user4);
-        users.removeIf(user -> (user.getAge() > 18));
-        System.out.println(JSONArray.toJSONString(users));
+//        ArrayList<User> users = new ArrayList<>();
+//        User user1=new User(18,"张三","湖北");
+//        User user2=new User(20,"张铁",null);
+//        User user3=new User(21,"李四","湖南");
+//        User user4=new User(25,"李静","广西");
+//        users.add(user1);
+//        users.add(user2);
+//        users.add(user3);
+//        users.add(user4);
+//        users.removeIf(user -> (user.getAge() > 18));
+//        System.out.println(JSONArray.toJSONString(users));
+
+        System.out.println(LegTypeEnum.AUTOCALL.getCode());
 
 
     }
