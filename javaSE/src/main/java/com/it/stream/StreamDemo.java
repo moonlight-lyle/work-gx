@@ -1,12 +1,15 @@
 package com.it.stream;
 
 
+import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.it.enumeration.LegTypeEnum;
+import com.it.pojo.ProductDto;
 import com.it.pojo.User;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -14,11 +17,11 @@ import java.util.stream.Stream;
 public class StreamDemo {
     public static void main(String[] args) {
         // filter使用
-        List<String> list=new ArrayList<String>();
-        list.add("周杰伦");
-        list.add("王力宏");
-        list.add("王杰");
-        list.add("林俊杰");
+//        List<String> list=new ArrayList<String>();
+//        list.add("周杰伦");
+//        list.add("王力宏");
+//        list.add("王杰");
+//        list.add("林俊杰");
         // 筛选出包含"王"的数据
 //        Stream<String> stream = list.stream().filter(item -> item.contains("王"));
 //        stream.forEach(System.out::println);
@@ -71,7 +74,35 @@ public class StreamDemo {
 //        users.removeIf(user -> (user.getAge() > 18));
 //        System.out.println(JSONArray.toJSONString(users));
 
-        System.out.println(LegTypeEnum.AUTOCALL.getCode());
+//        System.out.println(LegTypeEnum.AUTOCALL.getCode());
+
+        // 根据对象的某个属性排序
+        List<ProductDto> list = new ArrayList<>();
+        ProductDto productDto1 = new ProductDto();
+        productDto1.setKeyP("11");
+        productDto1.setNatureDate(DateUtil.parseDate("2022-05-23"));
+        list.add(productDto1);
+
+        ProductDto productDto2 = new ProductDto();
+        productDto2.setKeyP("22");
+        productDto2.setNatureDate(DateUtil.parseDate("2022-04-23"));
+        list.add(productDto2);
+
+        ProductDto productDto3 = new ProductDto();
+        productDto3.setKeyP("33");
+        productDto3.setNatureDate(DateUtil.parseDate("2022-12-23"));
+        list.add(productDto3);
+
+        ProductDto productDto4 = new ProductDto();
+        productDto4.setKeyP("44");
+        productDto4.setNatureDate(DateUtil.parseDate("2022-08-23"));
+        list.add(productDto4);
+
+        // 排序
+        List<ProductDto> collect = list.stream().sorted(Comparator.comparing(ProductDto::getNatureDate)).collect(Collectors.toList());
+        for (ProductDto productDto : collect) {
+            System.out.println(productDto.getKeyP()+":"+productDto.getNatureDate());
+        }
 
 
     }
