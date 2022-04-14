@@ -10,8 +10,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @create 2022/4/13/013 21:04
  **/
 @SpringBootApplication
-public class ConsumerApplication {
+public class SpringBootConsumerApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ConsumerApplication.class);
+        SpringApplication.run(SpringBootConsumerApplication.class);
     }
 }

@@ -6,4 +6,6 @@ rocketmq:
   name-server: 192.168.211.132:9876
   # 默认的消息组
   producer:
-    group: group1
+    group: ifdts-group
+    topic: ifdts-topic
+    tags: admittedCustomerTag

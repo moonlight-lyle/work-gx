@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.spring.annotation.ConsumeMode;
 import org.apache.rocketmq.spring.annotation.MessageModel;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
+import org.apache.rocketmq.spring.annotation.SelectorType;
 import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.springframework.stereotype.Component;
 
@@ -13,9 +14,10 @@ import org.springframework.stereotype.Component;
 @RocketMQMessageListener(
         consumerGroup = "${rocketmq.consumer.group}",
         topic = "${rocketmq.consumer.topic}",
-        selectorExpression = "${rocketmq.consumer.tags}",
+        selectorType = SelectorType.TAG,
         messageModel = MessageModel.CLUSTERING,
-        consumeMode = ConsumeMode.ORDERLY)
+        consumeMode = ConsumeMode.ORDERLY
+        )
 public class Consumer implements RocketMQListener<AdmittedCustomerMqVO> {
 
     @Override
